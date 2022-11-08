@@ -3,17 +3,17 @@ import './App.css';
 const { v4: uuidv4 } = require('uuid');
 
 function AppGet() {
-  var requestURI = 'https://localhost:7256/api/VideoGames';
+  const requestURI = 'https://localhost:7256/api/VideoGames';
 
   const [videoGames, setVideoGames] = useState([]);
 
   useEffect(() => {
     fetch(requestURI)
       .then((response) => response.json())
-      .then((json) => {
-        setVideoGames(json);
+      .then((data) => {
+        setVideoGames(data);
         // console.log(json);
-        return json;
+        return data;
       });
   }, [requestURI]);
 
