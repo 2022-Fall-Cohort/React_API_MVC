@@ -19,5 +19,5 @@ function AppGet() {
 
 export default function App() {
   var videoGames = AppGet();
-  return <HomeIndex props={videoGames} />;
+  return <HomeIndex data={videoGames} />;
 }

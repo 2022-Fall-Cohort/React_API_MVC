@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 
 export default function HomeIndex(props) {
-  var arr = props.props;
+  var arr = props.data;
   var key = "'" + nanoid() + "'";
 
   return arr.map((element) => {
