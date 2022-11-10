@@ -6,17 +6,17 @@ export default function HomeIndex(props) {
   return (
     <div>
       <table>
-        {videoGames.map((item) => {
-          return (
-            <tbody key={item.id}>
-              <tr>
+        <tbody>
+          {videoGames.map((item) => {
+            return (
+              <tr key={item.id}>
                 <td>{item.title}</td>
                 <td>{item.studioId}</td>
                 <td>{item.mainCharacterId}</td>
               </tr>
-            </tbody>
-          );
-        })}
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
