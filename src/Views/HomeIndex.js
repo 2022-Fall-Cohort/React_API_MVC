@@ -1,18 +1,23 @@
-import { nanoid } from 'nanoid';
+import React from 'react';
 
 export default function HomeIndex(props) {
-  var arr = props.data;
-  var key = "'" + nanoid() + "'";
-
-  return arr.map((element) => {
-    return (
-      <ul key={key + element.title}>
-        <li>
-          <h2>Title: {element.title}</h2>
-        </li>
-        <li>StudioId: {element.studioId}</li>
-        <li>MainCharacterId: {element.mainCharacterId}</li>
-      </ul>
-    );
-  });
+  const videoGames = props.data;
+  console.log(videoGames);
+  return (
+    <div>
+      <table>
+        {videoGames.map((item) => {
+          return (
+            <tbody key={item.id}>
+              <tr>
+                <td>{item.title}</td>
+                <td>{item.studioId}</td>
+                <td>{item.mainCharacterId}</td>
+              </tr>
+            </tbody>
+          );
+        })}
+      </table>
+    </div>
+  );
 }
