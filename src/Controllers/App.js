@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import HomeIndex from '../Views/HomeIndex';
 
-function AppGet() {
-  const requestURI = 'https://localhost:7256/api/VideoGames/';
+export default function App() {
+  const requestURI = 'https://localhost:7256/api/VideoGames';
 
-  var [videoGames, setVideoGames] = useState([]);
+  var [videoGames, setVideoGames] = useState(() => []);
 
   useEffect(() => {
     fetch(requestURI)
@@ -14,10 +16,8 @@ function AppGet() {
       });
   }, []);
 
-  return videoGames;
-}
+  // console.log('videoGames is ', videoGames);
+  var selection = [null, null, videoGames, false];
 
-export default function App() {
-  var videoGames = AppGet();
-  return <HomeIndex data={videoGames} />;
+  return <HomeIndex data={selection} />;
 }
