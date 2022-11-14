@@ -12,7 +12,7 @@ var videoGames = [];
 var setShow = null;
 var getShow = null;
 
-const LoginForm = ({ onSubmit }) => {
+const EditForm = ({ onSubmit }) => {
   return (
     <Form onSubmit={onSubmit}>
       <Form.Group controlId="formBasicTitle">
@@ -73,7 +73,7 @@ export default function Edit(props) {
     return;
   };
 
-  const onLoginFormSubmit = (e) => {
+  const onEditFormSubmit = (e) => {
     e.preventDefault();
     setShow(false);
 
@@ -98,7 +98,7 @@ export default function Edit(props) {
           <Modal.Title>Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoginForm onSubmit={onLoginFormSubmit} />
+          <EditForm onSubmit={onEditFormSubmit} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>
