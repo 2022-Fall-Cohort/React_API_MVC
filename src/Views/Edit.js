@@ -6,11 +6,19 @@ import 'bootstrap/dist/css/bootstrap.css';
 var title = null;
 var studioId = null;
 var mainCharacterId = null;
-var idx = 0;
-// var id = 0;
+
+var idx = null;
+var id = null;
+// eslint-disable-next-line
+var videoGame = {};
+// eslint-disable-next-line
+var setVideoGame = null;
 var videoGames = [];
+// eslint-disable-next-line
+var setVideoGames = null;
 var setShow = null;
 var getShow = null;
+var putdata = null;
 
 const EditForm = ({ onSubmit }) => {
   return (
@@ -61,10 +69,14 @@ export default function Edit(props) {
   }
 
   idx = props.data[0];
-  // id = props.data[1];
-  videoGames = props.data[2];
-  setShow = props.data[3];
-  getShow = props.data[4];
+  id = props.data[1];
+  videoGame = props.data[2];
+  setVideoGame = props.data[3];
+  videoGames = props.data[4];
+  setVideoGames = props.data[5];
+  setShow = props.data[6];
+  getShow = props.data[7];
+  putdata = props.data[8];
 
   // console.log(props);
 
@@ -86,6 +98,8 @@ export default function Edit(props) {
     title = null;
     studioId = null;
     mainCharacterId = null;
+
+    putdata(videoGames[idx], id);
 
     return;
   };
