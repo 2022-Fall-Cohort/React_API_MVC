@@ -5,10 +5,15 @@ import { Button } from 'react-bootstrap';
 import { Fragment } from 'react';
 import Edit from './Edit';
 import Create from './Create';
+import Delete from './Delete';
+import Details from './Details';
 import 'bootstrap/dist/css/bootstrap.css';
+import '../index.css';
 
 var selectionEdit = [];
 var selectionCreate = [];
+var selectionDelete = [];
+var selectionDetails = [];
 
 export default function HomeIndex(props) {
   var idx = props.data[0];
@@ -17,8 +22,11 @@ export default function HomeIndex(props) {
   var videoGames = props.data[3];
   const [showEdit, setShowEdit] = useState(() => props.data[4]);
   const [showCreate, setShowCreate] = useState(() => props.data[5]);
-  var putData = props.data[6];
-  var postData = props.data[7];
+  const [showDelete, setShowDelete] = useState(() => props.data[6]);
+  const [showDetails, setShowDetails] = useState(() => props.data[6]);
+  var putData = props.data[7];
+  var postData = props.data[8];
+  var deleteData = props.data[9];
   // console.log(props);
 
   var getShowEdit = () => {
@@ -27,6 +35,14 @@ export default function HomeIndex(props) {
 
   var getShowCreate = () => {
     return showCreate;
+  };
+
+  var getShowDelete = () => {
+    return showDelete;
+  };
+
+  var getShowDetails = () => {
+    return showDelete;
   };
 
   // console.log(videoGames);
@@ -51,8 +67,14 @@ export default function HomeIndex(props) {
           <h5>Create</h5>
         </Button>
       </div>
-
       <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Studio Id</th>
+            <th>Main Character Id</th>
+          </tr>
+        </thead>
         <tbody>
           {videoGames.map((item, ix) => {
             return (
@@ -84,6 +106,51 @@ export default function HomeIndex(props) {
                       </Button>
                     </div>
                   </td>
+                  <td>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setShowDetails(true);
+                          idx = ix;
+                          id = item.id;
+                          selectionDetails = [
+                            idx,
+                            id,
+                            videoGame,
+                            videoGames,
+                            setShowDetails,
+                            getShowDetails,
+                          ];
+                        }}
+                      >
+                        Details
+                      </Button>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setShowDelete(true);
+                          idx = ix;
+                          id = item.id;
+                          selectionDelete = [
+                            idx,
+                            id,
+                            videoGame,
+                            videoGames,
+                            setShowDelete,
+                            getShowDelete,
+                            deleteData,
+                          ];
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               </Fragment>
             );
@@ -93,6 +160,8 @@ export default function HomeIndex(props) {
       <div>
         <Edit show={showEdit} data={selectionEdit} />
         <Create show={showCreate} data={selectionCreate} />
+        <Delete show={showDelete} data={selectionDelete} />
+        <Details show={showDetails} data={selectionDetails} />
       </div>
     </div>
   );

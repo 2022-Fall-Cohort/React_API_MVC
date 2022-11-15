@@ -14,7 +14,7 @@ var videoGame = {};
 var videoGames = [];
 var setShowEdit = null;
 var getShowEdit = null;
-var putdata = null;
+var putData = null;
 
 const EditForm = ({ onSubmit }) => {
   return (
@@ -70,7 +70,7 @@ export default function Edit(props) {
   videoGames = props.data[3];
   setShowEdit = props.data[4];
   getShowEdit = props.data[5];
-  putdata = props.data[6];
+  putData = props.data[6];
 
   // console.log(props);
 
@@ -99,7 +99,7 @@ export default function Edit(props) {
     studioId = 0;
     mainCharacterId = 0;
 
-    putdata(videoGames[idx], id);
+    putData(videoGames[idx], id);
 
     return;
   };

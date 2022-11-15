@@ -13,6 +13,7 @@ export default function App() {
   var videoGames = data;
   var showEdit = false;
   var showCreate = false;
+  var showDelete = false;
 
   // GET
   useEffect(() => {
@@ -61,6 +62,18 @@ export default function App() {
     });
   }
 
+  // DELETE
+  function DeleteData(dataObj, id) {
+    fetch(requestURI + id, {
+      method: 'DELETE',
+      body: JSON.stringify(dataObj),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    }).then((response) => {
+      setRefresh(true);
+      // console.log('DELETE response is ', response);
+    });
+  }
+
   // console.log('videoGames is ', videoGames);
   var selection = [
     idx,
@@ -69,8 +82,10 @@ export default function App() {
     videoGames,
     showEdit,
     showCreate,
+    showDelete,
     PutData,
     PostData,
+    DeleteData,
   ];
 
   return <HomeIndex data={selection} />;

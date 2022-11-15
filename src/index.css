@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
-td {
-  margin-right: '10px'
+td{
+  margin-right: '10px';
+  text-align: 'center';
+  border: solid;
 }
+
