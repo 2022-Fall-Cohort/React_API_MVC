@@ -4,27 +4,57 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Fragment } from 'react';
 import Edit from './Edit';
+import Create from './Create';
 import 'bootstrap/dist/css/bootstrap.css';
 
-var selection = [];
+var selectionEdit = [];
+var selectionCreate = [];
 
 export default function HomeIndex(props) {
   var idx = props.data[0];
   var id = props.data[1];
   var videoGame = props.data[2];
-  var setVideoGame = props.data[3];
-  var videoGames = props.data[4];
-  var setVideoGames = props.data[5];
-  const [show, setShow] = useState(props.data[6]);
-  var putData = props.data[7];
+  var videoGames = props.data[3];
+  const [showEdit, setShowEdit] = useState(() => props.data[4]);
+  const [showCreate, setShowCreate] = useState(() => props.data[5]);
+  var putData = props.data[6];
+  var postData = props.data[7];
   // console.log(props);
+
+  var getShowEdit = () => {
+    return showEdit;
+  };
+
+  var getShowCreate = () => {
+    return showCreate;
+  };
+
+  // console.log(videoGames);
 
   return (
     <div>
+      <div className="d-flex align-items-center justify-content-left">
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            setShowCreate(true);
+            selectionCreate = [
+              videoGame,
+              videoGames,
+              setShowCreate,
+              getShowCreate,
+              postData,
+            ];
+            // console.log(selectionCreate);
+          }}
+        >
+          <h5>Create</h5>
+        </Button>
+      </div>
+
       <table>
         <tbody>
           {videoGames.map((item, ix) => {
-            // console.log(item, ix);
             return (
               <Fragment key={item.id}>
                 <tr>
@@ -36,23 +66,18 @@ export default function HomeIndex(props) {
                       <Button
                         onClick={(e) => {
                           e.preventDefault();
-                          setShow(true);
+                          setShowEdit(true);
                           idx = ix;
                           id = item.id;
-                          selection = [
+                          selectionEdit = [
                             idx,
                             id,
                             videoGame,
-                            setVideoGame,
                             videoGames,
-                            setVideoGames,
-                            setShow,
-                            (show) => {
-                              return show;
-                            },
+                            setShowEdit,
+                            getShowEdit,
                             putData,
                           ];
-                          // console.log(selection);
                         }}
                       >
                         Edit
@@ -66,7 +91,8 @@ export default function HomeIndex(props) {
         </tbody>
       </table>
       <div>
-        <Edit show={show} data={selection} />
+        <Edit show={showEdit} data={selectionEdit} />
+        <Create show={showCreate} data={selectionCreate} />
       </div>
     </div>
   );

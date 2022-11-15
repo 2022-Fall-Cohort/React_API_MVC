@@ -7,16 +7,14 @@ var title = null;
 var studioId = 0;
 var mainCharacterId = 0;
 
-var idx = null;
-var id = null;
-// eslint-disable-next-line
 var videoGame = {};
+// eslint-disable-next-line no-unused-vars
 var videoGames = [];
-var setShowEdit = null;
-var getShowEdit = null;
-var putdata = null;
+var setShowCreate = null;
+var getShowCreate = null;
+var postData = null;
 
-const EditForm = ({ onSubmit }) => {
+const CreateForm = ({ onSubmit }) => {
   return (
     <Form onSubmit={onSubmit}>
       <Form.Group controlId="formBasicTitle">
@@ -24,8 +22,8 @@ const EditForm = ({ onSubmit }) => {
         <Form.Control
           autoComplete="title"
           type="text"
-          placeholder={videoGames[idx].title}
-          defaultValue={videoGames[idx].title}
+          placeholder=""
+          defaultValue=""
           onChange={(e) => (title = e.target.value)}
         />
       </Form.Group>
@@ -35,8 +33,8 @@ const EditForm = ({ onSubmit }) => {
         <Form.Control
           autoComplete="studioId"
           type="text"
-          placeholder={videoGames[idx].studioId}
-          defaultValue={videoGames[idx].studioId}
+          placeholder=""
+          defaultValue="0"
           onChange={(e) => (studioId = e.target.value)}
         />
       </Form.Group>
@@ -46,8 +44,8 @@ const EditForm = ({ onSubmit }) => {
         <Form.Control
           autoComplete="mainCharacterId"
           type="text"
-          placeholder={videoGames[idx].mainCharacterId}
-          defaultValue={videoGames[idx].mainCharacterId}
+          placeholder=""
+          defaultValue="0"
           onChange={(e) => (mainCharacterId = e.target.value)}
         />
       </Form.Group>
@@ -59,59 +57,53 @@ const EditForm = ({ onSubmit }) => {
   );
 };
 
-export default function Edit(props) {
+function CreateFormSubmit(e) {
+  e.preventDefault();
+  setShowCreate(false);
+
+  if (title === null) return;
+
+  videoGame.title = title;
+  videoGame.studioId = studioId;
+  videoGame.mainCharacterId = mainCharacterId;
+
+  postData(videoGame);
+
+  // console.log(videoGame, videoGames);
+
+  title = null;
+  studioId = 0;
+  mainCharacterId = 0;
+
+  return;
+}
+
+export default function Create(props) {
   if (!props.show) {
     return null;
   }
 
-  idx = props.data[0];
-  id = props.data[1];
-  videoGame = props.data[2];
-  videoGames = props.data[3];
-  setShowEdit = props.data[4];
-  getShowEdit = props.data[5];
-  putdata = props.data[6];
+  videoGame = props.data[0];
+  videoGames = props.data[1];
+  setShowCreate = props.data[2];
+  getShowCreate = props.data[3];
+  postData = props.data[4];
 
-  // console.log(props);
+  // console.log(props, getShowCreate());
 
   var handleClose = () => {
-    setShowEdit(false);
-    return;
-  };
-
-  const onEditFormSubmit = (e) => {
-    e.preventDefault();
-    setShowEdit(false);
-
-    if (title !== null) {
-      videoGames[idx].title = title;
-    }
-
-    if (studioId !== 0) {
-      videoGames[idx].studioId = studioId;
-    }
-
-    if (mainCharacterId !== 0) {
-      videoGames[idx].mainCharacterId = mainCharacterId;
-    }
-
-    title = null;
-    studioId = 0;
-    mainCharacterId = 0;
-
-    putdata(videoGames[idx], id);
-
+    setShowCreate(false);
     return;
   };
 
   return (
     <div>
-      <Modal id="editModal" show={getShowEdit} onClose={handleClose}>
+      <Modal id="createModal" show={getShowCreate} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Edit</Modal.Title>
+          <Modal.Title>Create</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditForm onSubmit={onEditFormSubmit} />
+          <CreateForm onSubmit={CreateFormSubmit} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>

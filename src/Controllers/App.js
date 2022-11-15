@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import HomeIndex from '../Views/HomeIndex';
 import VideoGame from '../Models/VideoGame';
 
@@ -7,21 +7,28 @@ export default function App() {
 
   var idx = null;
   var id = null;
-  var [videoGame, setVideoGame] = useState(() => VideoGame());
-  var [videoGames, setVideoGames] = useState(() => []);
-  var show = false;
+  const [refresh, setRefresh] = useState(() => false);
+  var [data, setData] = useState(() => []);
+  var videoGame = new VideoGame();
+  var videoGames = data;
+  var showEdit = false;
+  var showCreate = false;
 
   // GET
   useEffect(() => {
     fetch(requestURI)
       .then((response) => response.json())
       .then((data) => {
-        setVideoGames(data);
+        setData(data);
+        setRefresh(false);
       });
-  }, []);
+  }, [refresh]);
+
+  videoGames = data;
+  // console.log(videoGames);
 
   // PUT
-  var putData = (dataObj, id) => {
+  function PutData(dataObj, id) {
     fetch(requestURI + id, {
       method: 'PUT',
       body: JSON.stringify(dataObj),
@@ -31,21 +38,39 @@ export default function App() {
         console.log('PUT Failed', response);
         return;
       } else {
-        console.log('PUT Succeeded', response);
+        // console.log('PUT Succeeded', response);
       }
     });
-  };
+  }
+
+  // POST
+  function PostData(dataObj) {
+    // console.log(dataObj);
+    fetch(requestURI, {
+      method: 'POST',
+      body: JSON.stringify(dataObj),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    }).then((response) => {
+      if (response.status !== 201) {
+        console.log('POST Failed', response);
+        return;
+      } else {
+        setRefresh(true);
+        // console.log('POST Succeeded', videoGames);
+      }
+    });
+  }
 
   // console.log('videoGames is ', videoGames);
   var selection = [
     idx,
     id,
     videoGame,
-    setVideoGame,
     videoGames,
-    setVideoGames,
-    show,
-    putData,
+    showEdit,
+    showCreate,
+    PutData,
+    PostData,
   ];
 
   return <HomeIndex data={selection} />;
