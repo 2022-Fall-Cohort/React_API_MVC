@@ -11,14 +11,14 @@ API/Database work:
 - Update (PUT) existing data records
 - Delete (DELETE) existing data records
 
-The layout of the application will utilize components to perform
+The layout of the application utilizes components to perform
 the following functionality:
 
 - Model structure and storage (to hold the design of our data and that which exists in the API)
 
 - View components to display the data on to the browser screen
 
-- Controller component to organize and provide the routing to
+- Controller component to organize and provide the direction to
   all functionality
 
  That which follows below, is the standard documentation for a React application
