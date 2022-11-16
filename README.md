@@ -1,12 +1,9 @@
 # React API/MVC Application
 
-This application currently (11/08/2022) does a Javascript "fetch"
-to retrieve data from an internal API for "VideoGames".
+This React program follows the basic MVC (Model View Controller) structure,
+when working with an API.
 
-As we progress, we will transform this app with a design to use the
-"Model View Controller" paradigm when interacting with the API.
-
-The final program will perform the 4 basic "CRUD" functions for
+This program performs the 4 basic "CRUD" functions for
 API/Database work:
 
 - Create (POST) new data records
@@ -14,14 +11,14 @@ API/Database work:
 - Update (PUT) existing data records
 - Delete (DELETE) existing data records
 
-The layout of the application will utilize components to perform
+The layout of the application utilizes components to perform
 the following functionality:
 
 - Model structure and storage (to hold the design of our data and that which exists in the API)
 
 - View components to display the data on to the browser screen
 
-- Controller component to organize and provide the routing to
+- Controller component to organize and provide the direction to
   all functionality
 
  That which follows below, is the standard documentation for a React application
