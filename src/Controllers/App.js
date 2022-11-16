@@ -4,6 +4,7 @@ import VideoGame from '../Models/VideoGame';
 
 export default function App() {
   const requestURI = 'https://localhost:7256/api/VideoGames/';
+  // const requestURI = 'https://localhost:7078/api/Flyrod/';
 
   var idx = null;
   var id = null;
@@ -14,6 +15,7 @@ export default function App() {
   var showEdit = false;
   var showCreate = false;
   var showDelete = false;
+  var showDetails = false;
 
   // GET
   useEffect(() => {
@@ -83,6 +85,7 @@ export default function App() {
     showEdit,
     showCreate,
     showDelete,
+    showDetails,
     PutData,
     PostData,
     DeleteData,
